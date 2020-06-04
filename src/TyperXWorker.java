@@ -22,27 +22,27 @@ import static java.awt.event.KeyEvent.SHIFT_DOWN_MASK;
 public class TyperXWorker
 {
 
-    Robot robot;
-    TyperXFrame ui;
-    private AtomicInteger isRunning;
     public static final int RUNNING = 1;
     public static final int STOPPED = 0;
+    private final Robot robot;
+    private final TyperXFrame xFrame;
+    private final AtomicInteger isRunning;
     private int startTime = 5;
-    private int strokeDelay = 8;
+    private int keyStrokeDelay = 8;
 
     public TyperXWorker(TyperXFrame frame) throws AWTException
     {
         this.robot = new Robot();
-        this.ui = frame;
+        this.xFrame = frame;
         this.isRunning = new AtomicInteger(STOPPED);
     }
 
     public static AWTKeyStroke getKeyStroke(char c)
     {
-        String upper = "`~'\"!@#$%^&*()_+{}|:<>?";
-        String lower = "`~'\"1234567890-=[]\\;,./";
+        final String upperKeys = "`~'\"!@#$%^&*()_+{}|:<>?";
+        final String lowerKeys = "`~'\"1234567890-=[]\\;,./";
 
-        int index = upper.indexOf(c);
+        int index = upperKeys.indexOf(c);
         if (index != -1) {
             int keyCode;
             boolean shift = false;
@@ -59,38 +59,36 @@ public class TyperXWorker
                     keyCode = KeyEvent.VK_QUOTE;
                     break;
                 default:
-                    keyCode = (int) Character.toUpperCase(lower.charAt(index));
+                    keyCode = Character.toUpperCase(lowerKeys.charAt(index));
                     shift = true;
             }
             return getAWTKeyStroke(keyCode, shift ? SHIFT_DOWN_MASK : 0);
         }
-        return getAWTKeyStroke((int) Character.toUpperCase(c), 0);
+        return getAWTKeyStroke(Character.toUpperCase(c), 0);
     }
 
 
-    private void pressKey(char c, int ms)
+    private void pressKey(char c, int miliSec)
     {
         AWTKeyStroke keyStroke = getKeyStroke(c);
         int keyCode = keyStroke.getKeyCode();
-        boolean shift = Character.isUpperCase(c) || keyStroke.getModifiers() == (InputEvent.SHIFT_MASK | SHIFT_DOWN_MASK);
-        if (shift) {
+        boolean isShiftRequired = Character.isUpperCase(c) || keyStroke.getModifiers() == (InputEvent.SHIFT_MASK | SHIFT_DOWN_MASK);
+
+        if (isShiftRequired) {
             robot.keyPress(KeyEvent.VK_SHIFT);
         }
-
-
         try{
             robot.keyPress(keyCode);
             robot.keyRelease(keyCode);
-            if (ms > 0) {
-                Thread.sleep(ms);
+            if (miliSec > 0) {
+                Thread.sleep(miliSec);
             }
-        } catch (Exception e) {
-//                System.out.println("Error printing "+ KeyEvent.getKeyText(keyCode));
-//                e.printStackTrace();
+        } catch (Exception exception) {
+            System.out.println("Error typing " + KeyEvent.getKeyText(keyCode));
+            exception.printStackTrace();
         }
 
-
-        if (shift) {
+        if (isShiftRequired) {
             robot.keyRelease(KeyEvent.VK_SHIFT);
         }
 
@@ -99,55 +97,56 @@ public class TyperXWorker
 
     private void sendKeys(String keys)
     {
-        Runnable run = () -> {
+        Runnable typerRunnable = () -> runTyper(keys);
+        Thread thread = new Thread(typerRunnable);
+        thread.start();
+    }
 
-            for (int i = 0; i < startTime; i++) {
-                if (isRunning.get() == STOPPED) {
-                    break;
-                }
-                this.ui.lableInfo.setText("Starting typing in " + (startTime - i) + " sec");
-                try{
-                    Thread.sleep(1000L);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(TyperXFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }
+    private void runTyper(String keys)
+    {
+        for (int i = 0; i < startTime; i++) {
+            if (isRunning.get() == STOPPED) {
+                break;
             }
-            this.ui.lableInfo.setText("Running  now..");
-            char[] charArray = keys.toCharArray();
-            for (int i = 0; i < charArray.length; i++) {
-                char c = charArray[i];
-                if (isRunning.get() == STOPPED) {
-                    break;
-                }
-                try{
-                    pressKey(c, strokeDelay);
-                    int progress = (i * 100) / charArray.length;
-                    this.ui.progress.setValue(progress);
-                } catch (Exception ex) {
+            this.xFrame.lableInfo.setText("Starting typing in " + (startTime - i) + " sec");
+            try{
+                Thread.sleep(1000L);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(TyperXFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        this.xFrame.lableInfo.setText("Running  now..");
+        char[] charArray = keys.toCharArray();
+        for (int i = 0; i < charArray.length; i++) {
+            char c = charArray[i];
+            if (isRunning.get() == STOPPED) {
+                break;
+            }
+            try{
+                pressKey(c, keyStrokeDelay);
+                int progress = (i * 100) / charArray.length;
+                this.xFrame.progress.setValue(progress);
+            } catch (Exception ex) {
 
-                    Logger.getLogger(TyperXFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                Logger.getLogger(TyperXFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
-            ui.startUI();
-            this.isRunning.set(STOPPED);
-        };
-        Thread th = new Thread(run);
-        th.start();
+        }
+        xFrame.startUI();
+        this.isRunning.set(STOPPED);
     }
 
     public void startRequest(String text)
     {
         if (isRunning.compareAndSet(STOPPED, RUNNING)) {
-            ui.stopUI();
+            xFrame.stopUI();
             this.sendKeys(text);
         }
-
     }
 
     public void stopRequest()
     {
         if (this.isRunning.compareAndSet(RUNNING, STOPPED)) {
-            ui.startUI();
+            xFrame.startUI();
         }
     }
 
@@ -162,13 +161,13 @@ public class TyperXWorker
         this.startTime = startTime;
     }
 
-    public int getStrokeDelay()
+    public int getKeyStrokeDelay()
     {
-        return strokeDelay;
+        return keyStrokeDelay;
     }
 
-    public void setStrokeDelay(int strokeDelay)
+    public void setKeyStrokeDelay(int keyStrokeDelay)
     {
-        this.strokeDelay = strokeDelay;
+        this.keyStrokeDelay = keyStrokeDelay;
     }
 }

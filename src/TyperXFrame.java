@@ -138,11 +138,6 @@ public class TyperXFrame extends javax.swing.JFrame {
 
         lineWrapCheckBox.setSelected(true);
         lineWrapCheckBox.setText("Word Wrap");
-        lineWrapCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lineWrapCheckBoxActionPerformed(evt);
-            }
-        });
         lineWrapCheckBox.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 lineWrapCheckBoxPropertyChange(evt);
@@ -239,9 +234,6 @@ public class TyperXFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_stopTypingActionPerformed
 
-    private void lineWrapCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lineWrapCheckBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lineWrapCheckBoxActionPerformed
 
     private void lineWrapCheckBoxPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_lineWrapCheckBoxPropertyChange
 
@@ -250,8 +242,6 @@ public class TyperXFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_lineWrapCheckBoxPropertyChange
 
     private void startTimerComboboxPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_startTimerComboboxPropertyChange
-        // TODO add your handling code here]
-
         int value = Integer.parseInt(this.startTimerCombobox.getSelectedItem().toString());
         worker.setStartTime(value);
 
@@ -260,7 +250,7 @@ public class TyperXFrame extends javax.swing.JFrame {
     private void strokeTimerComboBoxPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_strokeTimerComboBoxPropertyChange
 
         int value = Integer.parseInt(strokeTimerComboBox.getSelectedItem().toString());
-        worker.setStrokeDelay(value);
+        worker.setKeyStrokeDelay(value);
 
     }//GEN-LAST:event_strokeTimerComboBoxPropertyChange
 
