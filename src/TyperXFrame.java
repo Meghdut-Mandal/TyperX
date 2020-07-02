@@ -5,6 +5,8 @@
  */
 
 import java.awt.AWTException;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,6 +17,8 @@ import java.util.logging.Logger;
 @SuppressWarnings("ALL")
 public class TyperXFrame extends javax.swing.JFrame {
 
+    public static String version="0.3";
+    public static String tag="#DigitalAirStrike";
     public TyperXWorker worker;
 
     /**
@@ -96,7 +100,7 @@ public class TyperXFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("v0.2 #CarryMinati");
+        jLabel1.setText("v"+version+" "+tag);
 
         lableInfo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lableInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -107,7 +111,7 @@ public class TyperXFrame extends javax.swing.JFrame {
         jTextArea1.setFont(new java.awt.Font("Leelawadee UI", 0, 13)); // NOI18N
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
-        jTextArea1.setText("Welcome to TyperX v0.2 \nNote:- Dont use the system for anything else while TyperX is running.\n       Have patience,current transfer speed is 7.5k chars/Min.\nSteps to use TyperX:-\n1.Paste/Type  some Text in the space given below.\n2.Click on \"start typing\" button below. A 5 timer will start.\n3.Go to the target window where copy/paste is diabled and place the cursor there within that 5 seconds timer.\n4.Sit back and relax. After the timer end.TyperX will transfer all of the text to that window.");
+        jTextArea1.setText("Welcome to TyperX v"+version+ " \nNote:- Dont use the system for anything else while TyperX is running.\n       Have patience,current transfer speed is 7.5k chars/Min.\nSteps to use TyperX:-\n1.Paste/Type  some Text in the space given below.\n2.Click on \"start typing\" button below. A 5 timer will start.\n3.Go to the target window where copy/paste is diabled and place the cursor there within that 5 seconds timer.\n4.Sit back and relax. After the timer end.TyperX will transfer all of the text to that window.");
         jTextArea1.setWrapStyleWord(true);
         jTextArea1.setCaretPosition(0);
         jScrollPane2.setViewportView(jTextArea1);
@@ -219,6 +223,27 @@ public class TyperXFrame extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addContainerGap())
         );
+//        textArea.addKeyListener(new KeyListener()
+//        {
+//            @Override
+//            public void keyTyped(KeyEvent e)
+//            {
+//
+//            }
+//
+//            @Override
+//            public void keyPressed(KeyEvent e)
+//            {
+//                if (e.getKeyChar()=='~')
+//                System.out.println("key");
+//            }
+//
+//            @Override
+//            public void keyReleased(KeyEvent e)
+//            {
+//
+//            }
+//        });
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -281,7 +306,7 @@ public class TyperXFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> {
             try {
                 TyperXFrame frame = new TyperXFrame();
-                frame.setAlwaysOnTop(true);
+//                frame.setAlwaysOnTop(true);
                 frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
 

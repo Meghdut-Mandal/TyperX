@@ -50,8 +50,13 @@ public class TyperXWorker
                 // these chars need to be handled specially because
                 // they don't directly translate into the correct keycode
                 case '~':
+                    keyCode=192;
+                    shift=true;
+                    break;
                 case '\"':
+                    keyCode=222;
                     shift = true;
+                    break;
                 case '`':
                     keyCode = KeyEvent.VK_BACK_QUOTE;
                     break;
@@ -139,7 +144,8 @@ public class TyperXWorker
     {
         if (isRunning.compareAndSet(STOPPED, RUNNING)) {
             xFrame.stopUI();
-            this.sendKeys(text);
+            String  converted=text.replace("\t","    ");
+            this.sendKeys(converted);
         }
     }
 
