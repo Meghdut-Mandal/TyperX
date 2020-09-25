@@ -144,7 +144,8 @@ public class TyperXWorker
     {
         if (isRunning.compareAndSet(STOPPED, RUNNING)) {
             xFrame.stopUI();
-            String  converted=text.replace("\t","    ");
+            String  converted=text.replace("\t","    ").replaceAll("[^\\x00-\\x7F]", " ");
+
             this.sendKeys(converted);
         }
     }

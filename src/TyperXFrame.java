@@ -17,8 +17,8 @@ import java.util.logging.Logger;
 @SuppressWarnings("ALL")
 public class TyperXFrame extends javax.swing.JFrame {
 
-    public static String version="0.3";
-    public static String tag="#DigitalAirStrike";
+    public static String version="0.35";
+    public static String tag="#ReaChakraborty";
     public TyperXWorker worker;
 
     /**
