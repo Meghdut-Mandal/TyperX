@@ -28,7 +28,7 @@ public class TyperXWorker
     private final TyperXFrame xFrame;
     private final AtomicInteger isRunning;
     private int startTime = 5;
-    private int keyStrokeDelay = 8;
+    private int keyStrokeDelay = 100;
 
     public TyperXWorker(TyperXFrame frame) throws AWTException
     {
@@ -37,7 +37,7 @@ public class TyperXWorker
         this.isRunning = new AtomicInteger(STOPPED);
     }
 
-    public static AWTKeyStroke getKeyStroke(char c)
+    public static AWTKeyStroke getKeyStroke(char c) 
     {
         final String upperKeys = "`~'\"!@#$%^&*()_+{}|:<>?";
         final String lowerKeys = "`~'\"1234567890-=[]\\;,./";
@@ -109,6 +109,7 @@ public class TyperXWorker
 
     private void runTyper(String keys)
     {
+        int oldProgress = 10;
         for (int i = 0; i < startTime; i++) {
             if (isRunning.get() == STOPPED) {
                 break;
@@ -130,6 +131,14 @@ public class TyperXWorker
             try{
                 pressKey(c, keyStrokeDelay);
                 int progress = (i * 100) / charArray.length;
+                /*Take a pause for 2 seconds after 10% progress
+                Simulates somewhat of human typing habits*/
+                if(progress > 9 && progress%10 == 0) {
+                    if(oldProgress != progress) {
+                        Thread.sleep(2000L);
+                    }
+                    oldProgress = progress;
+                }
                 this.xFrame.progress.setValue(progress);
             } catch (Exception ex) {
 

@@ -5,8 +5,6 @@
  */
 
 import java.awt.AWTException;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,8 +15,8 @@ import java.util.logging.Logger;
 @SuppressWarnings("ALL")
 public class TyperXFrame extends javax.swing.JFrame {
 
-    public static String version="0.35";
-    public static String tag="#ReaChakraborty";
+    public static String version="0.355";
+    public static String tag="#PUBG";
     public TyperXWorker worker;
 
     /**
@@ -104,14 +102,14 @@ public class TyperXFrame extends javax.swing.JFrame {
 
         lableInfo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lableInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lableInfo.setText("To kaisa hai app log ?");
+        lableInfo.setText("We want PUBG back");
 
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Leelawadee UI", 0, 13)); // NOI18N
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
-        jTextArea1.setText("Welcome to TyperX v"+version+ " \nNote:- Dont use the system for anything else while TyperX is running.\n       Have patience,current transfer speed is 7.5k chars/Min.\nSteps to use TyperX:-\n1.Paste/Type  some Text in the space given below.\n2.Click on \"start typing\" button below. A 5 timer will start.\n3.Go to the target window where copy/paste is diabled and place the cursor there within that 5 seconds timer.\n4.Sit back and relax. After the timer end.TyperX will transfer all of the text to that window.");
+        jTextArea1.setText("Welcome to TyperX v"+version+ " \nNote:- \n • Dont use the system for anything else while TyperX is running.\n • Have patience,current transfer speed is 600 chars/min.\n • Steps to use TyperX:-\n  1. Paste/Type some Text in the space given below.\n  2. Click on \"start typing\" button below. A 5 second timer will start.\n  3. Go to the target window where copy/paste is diabled and place the cursor there within that 5\n  seconds timer.\n  4. Sit back and relax. After the timer end. TyperX will transfer all of the text to that window.");
         jTextArea1.setWrapStyleWord(true);
         jTextArea1.setCaretPosition(0);
         jScrollPane2.setViewportView(jTextArea1);
@@ -128,8 +126,10 @@ public class TyperXFrame extends javax.swing.JFrame {
 
         jLabel3.setText("Key Stroke responce Time");
 
-        strokeTimerComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2", "4", "6", "8", "10", "12" }));
-        strokeTimerComboBox.setSelectedIndex(3);
+        strokeTimerComboBox.setPrototypeDisplayValue("100 "); //Added to avoid clipping off of value in the beggining
+
+        strokeTimerComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "8", "10", "12", "50", "90", "100", "120", "150" }));
+        strokeTimerComboBox.setSelectedIndex(5);
         strokeTimerComboBox.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 strokeTimerComboBoxPropertyChange(evt);
@@ -138,7 +138,7 @@ public class TyperXFrame extends javax.swing.JFrame {
 
         jLabel4.setText("TyperX will wait for this many seconds before stating Transfer");
 
-        jLabel5.setText("The time diffrence between each charecter transfer in milis");
+        jLabel5.setText("The time diffrence between each charecter transfer in miliseconds");
 
         lineWrapCheckBox.setSelected(true);
         lineWrapCheckBox.setText("Word Wrap");
