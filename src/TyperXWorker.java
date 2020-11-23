@@ -3,6 +3,7 @@ import java.awt.AWTKeyStroke;
 import java.awt.Robot;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.security.Timestamp;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -109,7 +110,6 @@ public class TyperXWorker
 
     private void runTyper(String keys)
     {
-        int oldProgress = 10;
         for (int i = 0; i < startTime; i++) {
             if (isRunning.get() == STOPPED) {
                 break;
@@ -123,6 +123,9 @@ public class TyperXWorker
         }
         this.xFrame.lableInfo.setText("Running  now..");
         char[] charArray = keys.toCharArray();
+        int numDigits = String.valueOf(charArray.length).length() - 2;
+        long typeStartTime = System.currentTimeMillis() / 1000;
+        long currentTime = System.currentTimeMillis() / 1000;
         for (int i = 0; i < charArray.length; i++) {
             char c = charArray[i];
             if (isRunning.get() == STOPPED) {
@@ -131,15 +134,17 @@ public class TyperXWorker
             try{
                 pressKey(c, keyStrokeDelay);
                 int progress = (i * 100) / charArray.length;
-                /*Take a pause for 2 seconds after 10% progress
-                Simulates somewhat of human typing habits*/
-                if(progress > 9 && progress%10 == 0) {
-                    if(oldProgress != progress) {
-                        Thread.sleep(2000L);
-                    }
-                    oldProgress = progress;
-                }
                 this.xFrame.progress.setValue(progress);
+                /*
+                 * Take a pause after x seconds. Simulates somewhat of human typing habits.
+                 * x = number digits in the length of characters of the input string - 2
+                 * multiplied by 10 (seconds). The pauses are length dependent, so that it
+                 * stop very frequently for long paragraphs and stop adequetly for short paragraphs
+                 */
+                currentTime = System.currentTimeMillis() / 1000;
+                if((currentTime > typeStartTime) && ((currentTime - typeStartTime) % (10 * numDigits) == 0)) {
+                    Thread.sleep(2000L);
+                }
             } catch (Exception ex) {
 
                 Logger.getLogger(TyperXFrame.class.getName()).log(Level.SEVERE, null, ex);
