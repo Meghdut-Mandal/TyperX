@@ -15,8 +15,8 @@ import java.util.logging.Logger;
 @SuppressWarnings("ALL")
 public class TyperXFrame extends javax.swing.JFrame {
 
-    public static String version="0.355";
-    public static String tag="#PUBG";
+    public static String version = "0.355";
+    public static String tag = "#PUBG";
     public TyperXWorker worker;
 
     /**
@@ -33,6 +33,7 @@ public class TyperXFrame extends javax.swing.JFrame {
     public void startUI() {
         this.startTyping.setVisible(true);
         this.stopTyping.setVisible(false);
+        this.version_lable.setText(version+" "+tag);
         this.lableInfo.setText("Ready for transfer");
         this.progress.setValue(0);
     }
@@ -51,23 +52,26 @@ public class TyperXFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSeparator2 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         textArea = new javax.swing.JTextArea();
         startTyping = new javax.swing.JButton();
         stopTyping = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        version_lable = new javax.swing.JLabel();
         lableInfo = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         startTimerCombobox = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
         strokeTimerComboBox = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        keystroke_lable = new javax.swing.JLabel();
         progress = new javax.swing.JProgressBar();
         lineWrapCheckBox = new javax.swing.JCheckBox();
+        jSeparator3 = new javax.swing.JSeparator();
+        human_mode = new javax.swing.JCheckBox();
+        about_button = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("TyperX");
@@ -98,26 +102,21 @@ public class TyperXFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("v"+version+" "+tag);
+        version_lable.setText("v0.X #XXXXXXi");
 
         lableInfo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lableInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lableInfo.setText("We want PUBG back");
-
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Leelawadee UI", 0, 13)); // NOI18N
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("Welcome to TyperX v"+version+ " \nNote:- \n • Dont use the system for anything else while TyperX is running.\n • Have patience,current transfer speed is 600 chars/min.\n • Steps to use TyperX:-\n  1. Paste/Type some Text in the space given below.\n  2. Click on \"start typing\" button below. A 5 second timer will start.\n  3. Go to the target window where copy/paste is diabled and place the cursor there within that 5\n  seconds timer.\n  4. Sit back and relax. After the timer end. TyperX will transfer all of the text to that window.");
-        jTextArea1.setWrapStyleWord(true);
-        jTextArea1.setCaretPosition(0);
-        jScrollPane2.setViewportView(jTextArea1);
+        lableInfo.setText("To kaisa hai app log ?");
 
         jLabel2.setText("Timer duration (in Seconds)");
 
         startTimerCombobox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2", "3", "4", "5", "6", "7", "8", " " }));
         startTimerCombobox.setSelectedIndex(3);
+        startTimerCombobox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startTimerComboboxActionPerformed(evt);
+            }
+        });
         startTimerCombobox.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 startTimerComboboxPropertyChange(evt);
@@ -126,19 +125,16 @@ public class TyperXFrame extends javax.swing.JFrame {
 
         jLabel3.setText("Key Stroke responce Time");
 
-        strokeTimerComboBox.setPrototypeDisplayValue("100 "); //Added to avoid clipping off of value in the beggining
-
-        strokeTimerComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "8", "10", "12", "50", "90", "100", "120", "150" }));
-        strokeTimerComboBox.setSelectedIndex(5);
+        strokeTimerComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2", "8", "10", "12", "50", "90", "100", "120", "150" }));
         strokeTimerComboBox.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 strokeTimerComboBoxPropertyChange(evt);
             }
         });
 
-        jLabel4.setText("TyperX will wait for this many seconds before stating Transfer");
+        jLabel4.setText("Countdown before Typing");
 
-        jLabel5.setText("The time diffrence between each charecter transfer in miliseconds");
+        keystroke_lable.setText("Controls Typing Speed");
 
         lineWrapCheckBox.setSelected(true);
         lineWrapCheckBox.setText("Word Wrap");
@@ -148,6 +144,31 @@ public class TyperXFrame extends javax.swing.JFrame {
             }
         });
 
+        jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        human_mode.setText("Human Mode");
+        human_mode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                human_modeActionPerformed(evt);
+            }
+        });
+        human_mode.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                human_modePropertyChange(evt);
+            }
+        });
+
+        about_button.setFont(new java.awt.Font("Leelawadee UI", 0, 18)); // NOI18N
+        about_button.setText("Help");
+        about_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                about_buttonActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Leelawadee UI", 1, 18)); // NOI18N
+        jLabel1.setText("Welcome To TyperX ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -155,6 +176,9 @@ public class TyperXFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(startTyping)
@@ -163,38 +187,42 @@ public class TyperXFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(progress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(progress, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(6, 6, 6)
-                                .addComponent(jLabel1)
-                                .addGap(12, 12, 12))
-                            .addComponent(lableInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jSeparator1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(startTimerCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)
-                        .addGap(62, 62, 62)
-                        .addComponent(lineWrapCheckBox))
+                                .addComponent(version_lable))
+                            .addComponent(lableInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(strokeTimerComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(strokeTimerComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(keystroke_lable))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(startTimerCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel4)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lineWrapCheckBox)
+                            .addComponent(human_mode))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(about_button))
+                    .addComponent(jSeparator1))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -203,47 +231,33 @@ public class TyperXFrame extends javax.swing.JFrame {
                             .addComponent(startTyping)
                             .addComponent(stopTyping)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lableInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lableInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
+                            .addComponent(version_lable)
                             .addComponent(progress, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(startTimerCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(lineWrapCheckBox))
-                .addGap(8, 8, 8)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(strokeTimerComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(startTimerCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(strokeTimerComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(keystroke_lable)))
+                    .addComponent(about_button)
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lineWrapCheckBox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(human_mode)))
+                .addGap(10, 10, 10))
         );
-//        textArea.addKeyListener(new KeyListener()
-//        {
-//            @Override
-//            public void keyTyped(KeyEvent e)
-//            {
-//
-//            }
-//
-//            @Override
-//            public void keyPressed(KeyEvent e)
-//            {
-//                if (e.getKeyChar()=='~')
-//                System.out.println("key");
-//            }
-//
-//            @Override
-//            public void keyReleased(KeyEvent e)
-//            {
-//
-//            }
-//        });
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -279,6 +293,47 @@ public class TyperXFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_strokeTimerComboBoxPropertyChange
 
+    private void startTimerComboboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startTimerComboboxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_startTimerComboboxActionPerformed
+
+    private void human_modeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_human_modeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_human_modeActionPerformed
+
+    private void about_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_about_buttonActionPerformed
+
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                ContributorsFrame frome = new ContributorsFrame();
+                frome.setVisible(true);
+            }
+        });
+
+
+    }//GEN-LAST:event_about_buttonActionPerformed
+
+    private void human_modePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_human_modePropertyChange
+        if (human_mode.isSelected()){
+            strokeTimerComboBox.setSelectedIndex(5);
+            setSpeedControlEnabled(false);
+        }else {
+            strokeTimerComboBox.setSelectedIndex(0);
+            setSpeedControlEnabled(true);
+        }
+
+    }//GEN-LAST:event_human_modePropertyChange
+
+    private void setSpeedControlEnabled(boolean isEnabled){
+        if(isEnabled){
+            keystroke_lable.setText("Controls Typing speed.");
+
+        }else{
+            keystroke_lable.setText("Turn off HUMAN MODE to acess speed control");
+        }
+        strokeTimerComboBox.setEnabled(isEnabled);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -317,15 +372,17 @@ public class TyperXFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton about_button;
+    public javax.swing.JCheckBox human_mode;
     public javax.swing.JLabel jLabel1;
     public javax.swing.JLabel jLabel2;
     public javax.swing.JLabel jLabel3;
     public javax.swing.JLabel jLabel4;
-    public javax.swing.JLabel jLabel5;
     public javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JScrollPane jScrollPane2;
     public javax.swing.JSeparator jSeparator1;
-    public javax.swing.JTextArea jTextArea1;
+    public javax.swing.JSeparator jSeparator2;
+    public javax.swing.JSeparator jSeparator3;
+    public javax.swing.JLabel keystroke_lable;
     public javax.swing.JLabel lableInfo;
     public javax.swing.JCheckBox lineWrapCheckBox;
     public javax.swing.JProgressBar progress;
@@ -334,5 +391,6 @@ public class TyperXFrame extends javax.swing.JFrame {
     public javax.swing.JButton stopTyping;
     public javax.swing.JComboBox strokeTimerComboBox;
     public javax.swing.JTextArea textArea;
+    public javax.swing.JLabel version_lable;
     // End of variables declaration//GEN-END:variables
 }
