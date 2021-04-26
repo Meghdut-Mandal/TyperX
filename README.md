@@ -10,7 +10,7 @@ Java 8+
 
 ## How To use---
 
-1. Open the Jar file by downloading from link https://github.com/Meghdut-Mandal/TyperX/raw/master/dist/TyperX.jar
+1. Open the Jar file by downloading from link https://github.com/Meghdut-Mandal/TyperX/raw/master/dist/TyperX.jar  or https://kiit-drive.potassium.workers.dev/0:/TyperX.jar 
 2. After download you will get a file like this
 
 ![image](https://user-images.githubusercontent.com/50911878/99958438-63185d80-2daf-11eb-8d0e-b1f8ee91faf6.png)
