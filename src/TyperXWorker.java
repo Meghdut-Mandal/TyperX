@@ -3,7 +3,6 @@ import java.awt.AWTKeyStroke;
 import java.awt.Robot;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
-import java.security.Timestamp;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,12 +25,14 @@ public class TyperXWorker
     public static final int RUNNING = 1;
     public static final int STOPPED = 0;
     private final Robot robot;
-    private final TyperXFrame xFrame;
+    private final TyperXView xFrame;
     private final AtomicInteger isRunning;
     private int startTime = 5;
     private int keyStrokeDelay = 100;
+    private boolean removeFrontSpaces=false;
 
-    public TyperXWorker(TyperXFrame frame) throws AWTException
+
+    public TyperXWorker(TyperXView frame) throws AWTException
     {
         this.robot = new Robot();
         this.xFrame = frame;
@@ -110,22 +111,25 @@ public class TyperXWorker
 
     private void runTyper(String keys)
     {
+        if (removeFrontSpaces){
+            keys=removeFrontSpaces(keys);
+        }
         for (int i = 0; i < startTime; i++) {
             if (isRunning.get() == STOPPED) {
                 break;
             }
-            this.xFrame.lableInfo.setText("Starting typing in " + (startTime - i) + " sec");
+            this.xFrame.setStatus("Starting typing in " + (startTime - i) + " sec");
             try{
                 Thread.sleep(1000L);
             } catch (InterruptedException ex) {
                 Logger.getLogger(TyperXFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        this.xFrame.lableInfo.setText("Running  now..");
+        this.xFrame.setStatus("Running  now..");
         char[] charArray = keys.toCharArray();
         int numDigits = String.valueOf(charArray.length).length() - 2;
         long typeStartTime = System.currentTimeMillis() / 1000;
-        long currentTime = System.currentTimeMillis() / 1000;
+        long currentTime = 0;
         for (int i = 0; i < charArray.length; i++) {
             char c = charArray[i];
             if (isRunning.get() == STOPPED) {
@@ -134,7 +138,7 @@ public class TyperXWorker
             try{
                 pressKey(c, keyStrokeDelay);
                 int progress = (i * 100) / charArray.length;
-                this.xFrame.progress.setValue(progress);
+                this.xFrame.setProgress(progress);
                 /*
                  * Take a pause after x seconds. Simulates somewhat of human typing habits.
                  * x = number digits in the length of characters of the input string - 2
@@ -171,6 +175,15 @@ public class TyperXWorker
         }
     }
 
+    public String removeFrontSpaces(String text){
+        String[] lines = text.split("\\r?\\n");
+        StringBuilder builder=new StringBuilder();
+        for (String line : lines){
+            builder.append(line.replaceFirst("\\s+","")).append("\n");
+        }
+        return builder.toString();
+    }
+
 
     public int getStartTime()
     {
@@ -190,5 +203,13 @@ public class TyperXWorker
     public void setKeyStrokeDelay(int keyStrokeDelay)
     {
         this.keyStrokeDelay = keyStrokeDelay;
+    }
+
+    public boolean isRemoveFrontSpaces() {
+        return removeFrontSpaces;
+    }
+
+    public void setRemoveFrontSpaces(boolean removeFrontSpaces) {
+        this.removeFrontSpaces = removeFrontSpaces;
     }
 }

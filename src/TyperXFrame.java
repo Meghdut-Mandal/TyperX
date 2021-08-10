@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  * @author KIIT
  */
 @SuppressWarnings("ALL")
-public class TyperXFrame extends javax.swing.JFrame {
+public class TyperXFrame extends javax.swing.JFrame implements TyperXView {
 
     public static String version = "0.37";
     public static String tag = "#Ludo";
@@ -30,6 +30,7 @@ public class TyperXFrame extends javax.swing.JFrame {
         this.startUI();
     }
 
+    @Override
     public void startUI() {
         this.startTyping.setVisible(true);
         this.stopTyping.setVisible(false);
@@ -38,9 +39,20 @@ public class TyperXFrame extends javax.swing.JFrame {
         this.progress.setValue(0);
     }
 
+    @Override
     public void stopUI() {
         this.startTyping.setVisible(false);
         this.stopTyping.setVisible(true);
+    }
+
+    @Override
+    public void setProgress(int progress) {
+        this.progress.setValue(progress);
+    }
+
+    @Override
+    public void setStatus(String status) {
+        lableInfo.setText(status);
     }
 
     /**
@@ -137,7 +149,7 @@ public class TyperXFrame extends javax.swing.JFrame {
         keystroke_lable.setText("Controls Typing Speed");
 
         lineWrapCheckBox.setSelected(true);
-        lineWrapCheckBox.setText("Word Wrap");
+        lineWrapCheckBox.setText("Remove Space ");
         lineWrapCheckBox.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 lineWrapCheckBoxPropertyChange(evt);
@@ -190,7 +202,7 @@ public class TyperXFrame extends javax.swing.JFrame {
                                 .addComponent(progress, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(6, 6, 6)
                                 .addComponent(version_lable))
-                            .addComponent(lableInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE)))
+                            .addComponent(lableInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -236,7 +248,7 @@ public class TyperXFrame extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(version_lable)
                             .addComponent(progress, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

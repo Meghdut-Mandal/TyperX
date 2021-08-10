@@ -50,7 +50,7 @@
                               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                               <Component id="version_lable" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="lableInfo" pref="411" max="32767" attributes="0"/>
+                          <Component id="lableInfo" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
@@ -111,7 +111,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="7" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -267,7 +267,7 @@
     <Component class="javax.swing.JCheckBox" name="lineWrapCheckBox">
       <Properties>
         <Property name="selected" type="boolean" value="true"/>
-        <Property name="text" type="java.lang.String" value="Word Wrap"/>
+        <Property name="text" type="java.lang.String" value="Remove Space "/>
       </Properties>
       <Events>
         <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="lineWrapCheckBoxPropertyChange"/>
